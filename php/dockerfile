@@ -1,0 +1,16 @@
+FROM php:8.2-apache-bullseye
+
+RUN apt-get update -yq && \
+    apt-get install -yq curl && \
+    curl -sSL -o /usr/local/bin/install-php-extensions \
+        https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions && \
+    chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions gd xdebug pdo_mysql mysqli zip curl pdo_pgsql 
+
+#COPY ./app /var/www
+#COPY ./host/vhost.conf /etc/apache2/sites-available/000-default.conf 
+
+RUN chown -R www-data:www-data /var/www \
+    && chmod -R 755 /var/www
+
+EXPOSE 80
