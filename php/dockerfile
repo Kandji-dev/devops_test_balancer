@@ -7,9 +7,9 @@ RUN apt-get update -yq && \
     chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions gd xdebug pdo_mysql mysqli zip curl pdo_pgsql 
 
-#COPY ./app /var/www/html
+COPY ./app /var/www/html
 
-#COPY ./host/vhosts.conf /etc/apache2/sites-available/000-default.conf 
+COPY ./host/vhosts.conf /etc/apache2/sites-available/000-default.conf 
 
 RUN chown -R www-data:www-data /var/www \
     && chmod -R 755 /var/www
